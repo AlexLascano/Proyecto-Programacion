@@ -288,11 +288,11 @@ void buscarPelicula(string ruta) {
 
     while (archivo >> p.Id) {
         archivo.ignore();
-        getline(archivo, p.titulo);
-        getline(archivo, p.director);
+        getline(archivo, p.titulo, ';');
+        getline(archivo, p.director, ';');
         archivo >> p.anio;
         archivo.ignore();
-        getline(archivo, p.genero);
+        getline(archivo, p.genero, '.');
 
         if (p.Id == idBuscado) {
             cout << "\nPelicula encontrada:\n";
@@ -351,3 +351,4 @@ int main() {
         }
     }
 }
+
