@@ -1,0 +1,119 @@
+void mostrarPeliculas(QVector<Pelicula>& peliculas) {
+    qDebug() << "===== LISTA DE PELICULAS =====";
+    if (peliculas.empty()) {
+        qDebug() << "No se encuentran peliculas registradas.";
+    }
+    for (int i = 0; i < peliculas.size(); i++) {
+        qDebug() << "--------------------";
+        qDebug() << "ID:" << peliculas[i].Id;
+        qDebug() << "Titulo:" << peliculas[i].titulo;
+        qDebug() << "Director:" << peliculas[i].director;
+        qDebug() << "Anio:" << peliculas[i].anio;
+        qDebug() << "Genero:" << peliculas[i].genero;
+        qDebug() << "-----------------------";
+    }
+    qDebug() << "";
+}
+
+void eliminarPelicula(QString ruta, QVector<Pelicula>& peliculas) {
+    QFile archivoLeer(ruta);
+    
+    if (!archivoLeer.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "No hay peliculas registradas.\n";
+        return;
+    }
+    
+    int idEliminar;
+    qDebug() << "===ELIMINAR PELICULA===";
+    qDebug() << "Ingrese el ID de la pelicula a eliminar:";
+    
+    QTextStream in(stdin);
+    QString inputId = in.readLine();
+    bool ok;
+    idEliminar = inputId.toInt(&ok);
+    
+    if (!ok) {
+        qDebug() << "ID invalido.\n";
+        archivoLeer.close();
+        return;
+    }
+    
+    QFile archivoTemp("temp.txt");
+    if (!archivoTemp.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Error al crear archivo temporal.\n";
+        archivoLeer.close();
+        return;
+    }
+    
+    QTextStream streamLeer(&archivoLeer);
+    QTextStream streamTemp(&archivoTemp);
+    
+    Pelicula p;
+    bool encontrada = false;
+    Pelicula peliculaEliminada;
+    
+    while (!streamLeer.atEnd()) {
+        QString linea = streamLeer.readLine();
+        QStringList partes = linea.split(';');
+        
+        if (partes.size() >= 5) {
+            p.Id = partes[0].toInt();
+            p.titulo = partes[1];
+            p.director = partes[2];
+            p.anio = partes[3].toInt();
+            p.genero = partes[4];
+            p.genero = p.genero.remove('.');
+            
+            if (p.Id == idEliminar) {
+                encontrada = true;
+                peliculaEliminada = p;
+            } else {
+                streamTemp << p.Id << ";"
+                          << p.titulo << ";"
+                          << p.director << ";"
+                          << p.anio << ";"
+                          << p.genero << ".";
+                if (!streamLeer.atEnd()) {
+                    streamTemp << "\n";
+                }
+            }
+        }
+    }
+    
+    archivoLeer.close();
+    archivoTemp.close();
+    
+    if (!encontrada) {
+        qDebug() << "No existe una pelicula con ese ID.\n";
+        QFile::remove("temp.txt");
+        return;
+    }
+    
+    qDebug() << "\nPelicula a eliminar:";
+    qDebug() << "ID:" << peliculaEliminada.Id;
+    qDebug() << "Titulo:" << peliculaEliminada.titulo;
+    qDebug() << "Director:" << peliculaEliminada.director;
+    qDebug() << "Anio:" << peliculaEliminada.anio;
+    qDebug() << "Genero:" << peliculaEliminada.genero;
+    
+    qDebug() << "\nEsta seguro que desea eliminar? (s/n):";
+    QString confirmacion = in.readLine();
+    
+    if (confirmacion != "s" && confirmacion != "S") {
+        qDebug() << "Eliminacion cancelada.\n";
+        QFile::remove("temp.txt");
+        return;
+    }
+    
+    for (int i = 0; i < peliculas.size(); i++) {
+        if (peliculas[i].Id == idEliminar) {
+            peliculas.remove(i);
+            break;
+        }
+    }
+    
+    QFile::remove(ruta);
+    QFile::rename("temp.txt", ruta);
+    
+    qDebug() << "\nPelicula eliminada exitosamente.\n";
+}
