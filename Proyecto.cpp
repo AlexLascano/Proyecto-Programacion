@@ -12,27 +12,15 @@ struct Pelicula{
     string genero;
 };
 
-int leerEnteros(string mensaje) {
-    int valor;
-    while (true) {
-       cout<<mensaje;
-        cin>>valor;
 
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(1000, '\n');
-            cout<<"Ingrese solo numeros ";
-        }else {
-            return valor;
-        }
-    }
-
-}
-
-void actualizar (vector<Pelicula> &movies) {
+void actualizar (vector<Pelicula> &movies, string ruta) {
     //necesito la funcion guardar archivos
     //y una funcon que se encarge y reescriba el archivo al actualizar
-    int idBuscar=leerEnteros("Ingrese Id para actualizar:");
+
+    bool encontrado = false;
+    int idBuscar;
+    cout<<"Ingrese Id para actualizar:";
+    cin>>idBuscar;
     for (int i=0;i<movies.size();i++) {
         if (movies[i].Id==idBuscar) {
             cout<<"Titulo nuevo: ";
@@ -48,8 +36,9 @@ void actualizar (vector<Pelicula> &movies) {
 
 
             //AQUI LA NUEVA FUNCION DE GUARDA ARCHIVO
-            //guardaArchivo(peliculas)
+            guardarArchivo(ruta,movies);
             cout<<"peliculas guardas y actulizadas ";
+            encontrado=true;
             break;
 
 
