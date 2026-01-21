@@ -1,0 +1,9 @@
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/gestionPeliculas.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/install.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/gestionPeliculas_autogen_timestamp_deps.dir
+C:/Users/alepi/OneDrive/Documentos/gestionPeliculas/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/gestionPeliculas_autogen.dir
